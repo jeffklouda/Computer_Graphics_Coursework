@@ -1,0 +1,17 @@
+Jeff Klouda
+CSE 40166
+Assignment 7: 3D Orrery with Texturing
+11/13/2017
+
+For this assignment, I added texturing to my assignment 7 implementation of the
+orrery with lighting. To do this, I calculated vertex texture coordinates in 
+the setupSphere() function using the u and v calculations given in the assignment
+document, initialized textures for each planet using the given jpg files, and
+then sent the texture coordinates to the shader programs to determine the final
+fragment color by multiplying the texture color by the lighting color. The most
+difficult part of this assignment was figuring out how to initialize multiple 
+textures and then swap between them when rendering different objects.
+
+To run the program, open orrery-3d.html in a web browser and then use the
+controls below the canvas to influence the rendering and click and drag on
+the canvas to rotate the scene. Everything is behaving as expected.

@@ -1,0 +1,23 @@
+Jeff Klouda
+CSE 40166 - Computer Graphics
+Assignment 4
+10/04/17
+
+For this assignment I added animated hour, minute, and second hands to the 
+clock face I constructed in Assignment 3. To do this, I created three new 
+transformation matrices hourMat, minuteMat, and secondMat which I applied to 
+the same square that I used to create the hour and minute ticks on my clock 
+face. In my main function, I multilpied three new scaling matrices by the 
+ctm to scale each hand to the proper dimensions, and then translated each so 
+that it extended from the center of the clock toward the 12 hour mark.
+
+In the rendering function, I created a js Date object and then got the hour, 
+minute and second values from it. I then multiplied each transformation 
+matrix by a rotation matrix to rotate each hand to the proper angle. Because 
+these matrices are calculated every frame, the rotations are automatically 
+updated, and I can simply call requestAnimFrame(render) to get the next frame.
+
+The program works as intended, displaying an animated clock that updates its 
+minute and second hands every second and its hour hand every minute similar 
+to the example given in the assignment document. To run the program, open 
+clock.html using the Firefox browser.

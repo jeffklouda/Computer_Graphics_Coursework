@@ -1,0 +1,23 @@
+Jeff Klouda
+CSE 40166 - Computer Graphics
+Assignment 3
+09/27/16
+
+For this assignment I constructed the clock face as specified in the
+assignment 3 document. My vertices vector contained the vertices for a 
+circle of radius 1 and a 1 by 1 square, which I used to construct all the 
+forms in the clock face. To transform the vertices I used 3 transformation 
+matrices for the circles outerMat, innerMat, and centerMat that scaled the 
+circle to the appropriate sizes. For the hour ticks I created a 12 element 
+hourMarkerMats array conatining the transformation matrix for each tick. 
+Each tick is first scaled to the appropiate shape (from the 1x1 square 
+vertices), tranlated to the edge of the clock face, and then rotated in 30 
+degree increments. The minute ticks are transformed in the same way using 
+the 60 element minuteMarkerMats array, but are scaled smaller and rotated in 
+6 degree increments. I sent all of these matrices to the vertex shader using 
+the gl.uniformMatrix4fv() function and the colors of each element to the 
+fragment shader using gl.uniform3fv() before drawing each circle or square 
+using gl.drawArrays().
+The program works as intended, displaying a clock face similar to the example
+given in the assignment document. To run the program, open clockFace.html
+using the Firefox browser.

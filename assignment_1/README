@@ -1,0 +1,61 @@
+Jeff Klouda
+CSE 40166 Computer Graphics
+09-05-17
+Assignment 1
+
+To complete this assignment, I based my solution on the code we wrote in 
+class to create multiple triangles with different uniform colors. I 
+specified the vertices and colors required for the triangles, intialized
+WebGL, loaded the data into the GPU using a data buffer, and then used 
+gl.uniform3fv() to specify the color and gl.drawArrays to draw the triangles
+as well as the black lines around the triangles.
+
+I identified the vertices of the triangles from the guides given on the 
+assignment page and their colors using the color-dropper in Firefox's 
+Inspector tool. These values are repeated below.
+
+Triangle vertices and colors:
+#009EFD - Blue
+-0.75, 0.15
+0.25, 0.15
+-0.25, 0.65
+
+#AB27D7 - Purple
+0.0, 0.4
+0.5, 0.4
+0.25, 0.65
+
+#FEFD32 - Yellow
+0.0, 0.4
+0.5, 0.4
+0.25, 0.15
+
+#00FCFF - Cyan
+0.25, 0.15
+0.75, 0.15
+0.5, 0.4
+
+#FFA1BF - Pink
+-0.75, 0.15
+-0.25, 0.15
+-0.25, -0.4
+
+#FF2B06 - Red
+-0.25, 0.15
+0.0, -0.125
+-0.25, -0.4
+
+#FFA01C - Orange
+-0.25, 0.15
+0.75, 0.15
+0.25, -0.4
+
+#00FA30 - Green
+-0.25, -0.4
+0.25, -0.4
+0.0, -0.125
+
+#A1591D - Brown
+-0.25, -0.4
+0.25, -0.4
+0.0, -0.65

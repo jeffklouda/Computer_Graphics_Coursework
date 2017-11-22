@@ -1,0 +1,26 @@
+Jeff Klouda
+CSE 40166
+10/25/2017
+Assignment 5 - 3D Orrery
+
+I began this assignment by building off the code provided in the
+orrery-3D-template files. I created the transformation matrices for all the
+planets by first translating them away from the sun by their orbit distance
+and then rotating them on the Y axis based on the angle offset determined
+by the current day. I created the transformation matrix for the Moon using
+the same method and then multiplying by Earth's transformation matrix to 
+center the Moon's orbit around the Earth. I calculated the matrix for the
+circle drawn fo the Moon's orbit using the same method.
+
+In addition to this, I implemented the trackball functionality using the 
+example code from class, and I implemented the various HTML control elements
+below the Canvas element. I implemented their functionality for the Orbit On
+and Orbit Off options by simply not calling the drawOrbits() function when 
+Orbit On is not checked, the animation on/off options by not incrementing the
+current day when Animation On is not checked, the day on/off options by
+changing the innerHTML of day element based on which option is selected, and
+the inc/dec days per frame buttons by doubling or halving days per frame when
+each is pressed.
+
+Everything is working as expected. To run the program, run orrery-3D.html 
+in a web browser.

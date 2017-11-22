@@ -1,0 +1,26 @@
+Jeff Klouda
+CSE 40166
+Assignment 8: Rendering Realistic Orange
+11/13/2017
+
+For this assignment I implemented per-fragment lighting and normal 
+mapping using the given template files which included an obj file for
+the orange model, an orange image texture, an orange normal map, an obj
+parser script, and shader and JavaScript code which implemented texture
+mapping on the orange.
+
+I began by adding per-fragment lighting, calculating the eye and light 
+vectors per vertex in eye space, passing them on to the fragment shader,
+and then calculating lighting per the Phong Equation. I then implemented 
+the normal mapping by calculating the per-vertex tangent and bitangent in 
+eye space and used those vectors along with the normal vector to get the 
+the light and eye vectors in tangent space. I passed these values on to 
+fragment shader and then used them, along with the normal vector 
+referenced from the normal map for each fragment, to calculate lighting
+with the normal map.
+
+Finally, I added radio buttons to the HTML document that allow the user to switch between the different rendering modes.
+
+To run the program, open orange.html using a web browser and use the radio
+buttons at the bottom of the page to change how the orange is rendered. 
+The program behaves completely as expected.

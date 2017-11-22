@@ -1,0 +1,20 @@
+Jeff Klouda
+CSE 40166
+Assignment 6
+3D Orrery with Lighting
+
+For this assignment, I implemented lighting in the 3D orrery constructed
+for assignment 5. To do this, I constructed a normal array consisting of
+a normal for each vertex calculated by extending the normal out from the 
+center of the sphere, created a normal matrix from the modelview matrix
+using the normalMatrix function from MV.js, and then computed per-vertex 
+lighting in the vertex shader.
+
+I also added sliders to control the color of the lighting applied to the
+planets. These work by simply updating the color components of the
+ambient, diffuse, and specular components of light each time one of the
+slider values is changed.
+
+To run the program, open orrery-3d.html in a web browser and use the
+controls below the canvas to adjust the color of the light. Everything
+works as expected.

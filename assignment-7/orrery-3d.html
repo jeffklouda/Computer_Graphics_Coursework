@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Orrery</title>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    
+attribute vec3 a_vPosition;
+attribute vec4 a_vNormal;
+attribute vec2 a_vTexture;
+varying vec4 vertexLight;
+varying vec2 v_textureCoordinate;
+uniform vec4 u_ambientProduct, u_diffuseProduct, u_specularProduct;
+uniform float u_shininess;
+uniform mat4 u_mvMatrix;
+uniform mat4 u_projMatrix;
+uniform mat4 u_trckMatrix;
+uniform vec4 u_lightPosition;
+uniform vec3 u_lightColor;
+uniform mat3 u_normalMatrix;
+
+void
+main()
+{
+	v_textureCoordinate = a_vTexture;
+	vec4 position = vec4 ( 	a_vPosition.x, a_vPosition.y, a_vPosition.z, 1.0 );
+	vec3 pos = (u_mvMatrix * position).xyz;
+	vec3 v_N = normalize( u_normalMatrix*a_vNormal.xyz );
+	vec3 v_L = normalize( u_lightPosition.xyz - pos );
+	vec3 v_E = -normalize( pos );
+	vec3 v_R = normalize(-reflect(v_L, v_N));
+	
+	vec4 ambient = u_ambientProduct;
+	
+	float Kd = max( dot(v_L, v_N), 0.0 );
+	vec4  diffuse = Kd * u_diffuseProduct;
+
+    float Ks = pow( max(dot(v_E, v_R), 0.0), u_shininess );
+    vec4 specular = Ks * u_specularProduct;
+	
+    if( dot(v_L, v_N) < 0.0 ) {
+        specular = vec4(0.0, 0.0, 0.0, 1.0);
+    } 
+	
+    gl_Position = u_projMatrix * u_trckMatrix * u_mvMatrix * vec4(a_vPosition, 1.0);
+	// Normal debugging
+	//vertexLight = vec4(a_vNormal.x, a_vNormal.y, a_vNormal.z, 1.0);
+	vertexLight = ambient + diffuse + specular;
+	vertexLight.a = 1.0;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec3 u_color;
+uniform int u_orbit;
+varying vec4 vertexLight;
+varying vec2 v_textureCoordinate;
+uniform sampler2D u_textureSampler;
+
+void
+main()
+{
+    /*gl_FragColor = vec4 ( 	vertexLight.x * u_color.x,
+							vertexLight.y * u_color.y,
+							vertexLight.z * u_color.z,
+							1.0);
+	*/
+	if (u_orbit != 0) {
+		gl_FragColor = vec4 (u_color.x, u_color.y, u_color.z, 1.0);
+	} else {
+		vec4 textureColor = texture2D(u_textureSampler, vec2(		v_textureCoordinate.x, v_textureCoordinate.y));
+		gl_FragColor = vec4(	textureColor.x * vertexLight.x,
+								textureColor.y * vertexLight.y,
+								textureColor.z * vertexLight.z,
+								1.0);
+	}
+}
+</script>
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="trackball.js"></script>
+<script type="text/javascript" src="orrery-3d.js"></script>
+</head>
+
+<body>
+<canvas id="gl-canvas" width="1024" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br><br>
+<div id="slider">
+<div>
+Red Light Component    0 <input id="redSlider"
+type="range" min="0" max="1" step="0.1" value="1" />
+ 1
+</div>
+<div>
+Green Light Component  0 <input id="greenSlider"
+type="range" min="0" max="1" step="0.1" value="1" />
+ 1
+</div>
+<div>
+Blue Light Component   0 <input id="blueSlider"
+type="range" min="0" max="1" step="0.1" value="1" />
+ 1
+</div>
+</div>
+<button id="incDPF">Inc DPF</button>
+<button id="decDPF">Dec DPF</button>
+<form>
+    <input type="radio" name="function" id="orbon" checked>Orbit On
+    <input type="radio" name="function" id="orboff">Orbit Off
+</form>
+<form>
+    <input type="radio" name="function" id="animOn" checked>Animation On
+    <input type="radio" name="function" id="animOff">Animation Off
+</form>
+<form>
+    <input type="radio" name="function" id="dayOn" checked>Day On
+    <input type="radio" name="function" id="dayOff">Day Off
+</form>
+
+<!--- The statistics are printed here. --->
+<p id="printDay"></p>
+
+</body>
+</html>

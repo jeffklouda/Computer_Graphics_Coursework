@@ -1,0 +1,13 @@
+Jeff Klouda
+CSE40166
+9/13/2017
+Assignment 2 - 2D Ping-Pong Game
+
+For this assignment, I constructed a simple 2D ping-pong game consisting of a ball
+and a paddle, controlled using HTML buttons in the document. I programmed the game
+logic and animation in my javascript file, sending the centers and colors of the ball
+and paddle to the shaders as uniform variables and then rendering them as
+"gl.TRIANGLE_FAN"s. I tested the program by spending some time playing it, and
+everything is working as intended, including the buttons to change the ball's speed,
+the display of the number of times the ball has bounced off the paddle, and the
+performance of the ball and paddle.
